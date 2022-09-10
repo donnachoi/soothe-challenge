@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/kulim_park_light</item>
+        <item>@font/kulim_park_light_italic</item>
+        <item>@font/kulim_park_semibold</item>
+        <item>@font/lato_bold</item>
+    </array>
+</resources>
