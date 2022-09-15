@@ -72,6 +72,7 @@ fun LoginBody() {
               .padding(12.dp)
         )
         TextFieldEmail()
+        TextFieldPassword()
         ButtonLogin()
         Text("Don’t have an account? Sign up")
     }
@@ -91,6 +92,24 @@ fun TextFieldEmail() {
         onValueChange = { textState.value = it },
         placeholder = {
             Text(text = "Email address")
+        },
+    )
+}
+
+@Composable
+fun TextFieldPassword() {
+    val textState = remember { mutableStateOf(TextFieldValue()) }
+    TextField(
+        modifier = Modifier
+            .padding(bottom = 8.dp)
+            .fillMaxWidth(0.9f),
+        colors = TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White.copy(alpha = .85f),
+        ),
+        value = textState.value,
+        onValueChange = { textState.value = it },
+        placeholder = {
+            Text(text = "Password")
         },
     )
 }
