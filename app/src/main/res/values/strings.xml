@@ -3,4 +3,6 @@
     <string name="title_activity_welcome">Welcome</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_home">Home</string>
+    <string name="textfield_email">Email</string>
+    <string name="textfield_password">Password</string>
 </resources>

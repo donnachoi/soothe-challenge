@@ -1,4 +1,4 @@
-package com.example.sootheandroid
+package com.example.sootheandroid.layout
 
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -8,6 +8,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
@@ -33,13 +34,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.sootheandroid.R
+import com.example.sootheandroid.navigation.NavRoutes
 import com.example.sootheandroid.ui.theme.SootheAndroidTheme
 
 @Composable
-fun LoginForm() {
+fun LoginScreen(navController: NavController) {
     Surface(color = MaterialTheme.colors.background) {
         LoginBgImage()
         LoginBody()
+        Button(onClick = {navController.navigate(NavRoutes.Welcome.route)}) {
+            Text("Go to Welcome")
+        }
     }
 }
 
@@ -69,7 +77,7 @@ fun LoginBody() {
             "Log in",
             style = MaterialTheme.typography.h1,
             modifier = Modifier
-              .padding(12.dp)
+                .padding(12.dp)
         )
         TextFieldEmail()
         TextFieldPassword()
@@ -79,15 +87,24 @@ fun LoginBody() {
 }
 
 @Composable
-fun TextFieldEmail() {
+fun TextFieldEmail(
+    darkTheme: Boolean = isSystemInDarkTheme()
+) {
     val textState = remember { mutableStateOf(TextFieldValue()) }
+    val textFieldColors = if (darkTheme) {
+        TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White.copy(alpha = .15f)
+        )
+    } else {
+        TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White.copy(alpha = .85f)
+        )
+    }
     TextField(
         modifier = Modifier
             .padding(bottom = 8.dp)
             .fillMaxWidth(0.9f),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White.copy(alpha = .85f),
-        ),
+        colors = textFieldColors,
         value = textState.value,
         onValueChange = { textState.value = it },
         placeholder = {
@@ -97,15 +114,24 @@ fun TextFieldEmail() {
 }
 
 @Composable
-fun TextFieldPassword() {
+fun TextFieldPassword(
+    darkTheme: Boolean = isSystemInDarkTheme()
+) {
     val textState = remember { mutableStateOf(TextFieldValue()) }
+    val textFieldColors = if (darkTheme) {
+        TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White.copy(alpha = .15f)
+        )
+    } else {
+        TextFieldDefaults.textFieldColors(
+            backgroundColor = Color.White.copy(alpha = .85f)
+        )
+    }
     TextField(
         modifier = Modifier
             .padding(bottom = 8.dp)
             .fillMaxWidth(0.9f),
-        colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = Color.White.copy(alpha = .85f),
-        ),
+        colors = textFieldColors,
         value = textState.value,
         onValueChange = { textState.value = it },
         placeholder = {
@@ -115,13 +141,15 @@ fun TextFieldPassword() {
 }
 
 @Preview(device = "spec:width=411dp,height=891dp")
-@Preview(device = "spec:width=411dp,height=891dp",
+@Preview(
+    device = "spec:width=411dp,height=891dp",
     uiMode = UI_MODE_NIGHT_YES
 )
 @Preview(device = "spec:width=1280dp,height=800dp,dpi=480")
 @Composable
 fun LoginPreview() {
+    val navController = rememberNavController()
     SootheAndroidTheme {
-        LoginForm()
+        LoginScreen(navController)
     }
 }
