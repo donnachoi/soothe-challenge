@@ -106,7 +106,6 @@ fun ButtonLogin(navigateToLogin: () -> Unit) {
     }
 }
 
-
 @Preview(device = "spec:width=411dp,height=891dp")
 @Preview(device = "spec:width=673.5dp,height=841dp,dpi=480")
 @Preview(device = "spec:width=1280dp,height=800dp,dpi=480")
