@@ -19,15 +19,10 @@ import com.example.sootheandroid.navigation.NavRoutes
 import com.example.sootheandroid.ui.theme.SootheAndroidTheme
 
 @Composable
-fun WelcomeScreen(navController: NavController) {
+fun WelcomeScreen(navigateToLogin: () -> Unit) {
     Surface(color = MaterialTheme.colors.background) {
         WelcomeBgImage()
-        WelcomeBody()
-        Button(
-            onClick = { navController.navigate(NavRoutes.Login.route) }
-        ) {
-            Text("Go to Login")
-        }
+        WelcomeBody(navigateToLogin)
     }
 }
 
@@ -46,7 +41,7 @@ fun WelcomeBgImage() {
 }
 
 @Composable
-fun WelcomeBody() {
+fun WelcomeBody(navigateToLogin: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -55,7 +50,7 @@ fun WelcomeBody() {
     ) {
         Name()
         ButtonCreate()
-        ButtonLogin()
+        ButtonLogin(navigateToLogin)
     }
 }
 
@@ -93,7 +88,7 @@ fun ButtonCreate() {
 }
 
 @Composable
-fun ButtonLogin() {
+fun ButtonLogin(navigateToLogin: () -> Unit) {
     val buttonColors = ButtonDefaults.buttonColors(
         backgroundColor = MaterialTheme.colors.secondary,
         contentColor = MaterialTheme.colors.background,
@@ -105,7 +100,7 @@ fun ButtonLogin() {
             .fillMaxWidth(0.9f)
             .padding(bottom = 10.dp)
             .height(72.dp),
-        onClick = {  }
+        onClick = navigateToLogin,
     ) {
         Text("LOG IN")
     }
@@ -118,14 +113,14 @@ fun ButtonLogin() {
 annotation class RefDevices
 
 /*@RefDevices*/
-@Preview
-@Composable
-fun WelcomeScreenPreview() {
-    val navController = rememberNavController()
-    SootheAndroidTheme() {
-        WelcomeScreen(navController)
-    }
-}
+//@Preview
+//@Composable
+//fun WelcomeScreenPreview() {
+//    val navController = rememberNavController()
+//    SootheAndroidTheme() {
+//        WelcomeScreen(onNavigateToLogin)
+//    }
+//}
 
 
 

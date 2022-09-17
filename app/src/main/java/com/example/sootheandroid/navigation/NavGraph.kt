@@ -14,12 +14,14 @@ fun NavGraph (
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Welcome.route)
+        startDestination = "welcome")
     {
-        composable(route = NavRoutes.Welcome.route){
-            WelcomeScreen(navController)
+        composable("welcome"){
+            WelcomeScreen(
+                navigateToLogin = {navController.navigate("login")}
+            )
         }
-        composable(route = NavRoutes.Login.route){
+        composable("login"){
             LoginScreen(navController)
         }
     }
